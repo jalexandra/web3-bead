@@ -21,5 +21,7 @@ class DatabaseSeeder extends Seeder
         $this->call(ConnectQuestionTagSeeder::class);
         $this->call(ConnectQuestionUserSeeder::class);
         $this->call(ConnectAnswerUserSeeder::class);
+
+        $this->call(CorrectAnswerSeeder::class);
     }
 }
