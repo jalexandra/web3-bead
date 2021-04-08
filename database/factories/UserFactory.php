@@ -21,14 +21,15 @@ class UserFactory extends Factory
      *
      * @return array
      */
-    public function definition()
+    public function definition(): array
     {
         return [
-            'name' => $this->faker->name,
+            'username' => $this->faker->userName,
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => Hash::make('password'),
             'remember_token' => Str::random(10),
+            'xp' => $this->faker->boolean(70) ? 0 : $this->faker->numberBetween(1, 100_000),
         ];
     }
 }
