@@ -13,7 +13,7 @@ class AnswerFactory extends Factory
     {
         return [
             'description' => $this->faker->sentence(10, true),
-            'score' => $this->faker->boolean(70) ? $this->faker->numberBetween(1, 100_000) : 0,
+            'score' => $this->faker->boolean(70) ? $this->faker->numberBetween(1, 100) : 0,
         ];
     }
 }
