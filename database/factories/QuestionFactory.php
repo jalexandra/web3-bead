@@ -14,8 +14,8 @@ class QuestionFactory extends Factory
         return [
             'title' => $this->faker->sentence,
             'description' => $this->faker->paragraph($this->faker->numberBetween(3, 15)),
-            'score' => $this->faker->boolean(70) ? $this->faker->numberBetween(1, 100_000) : 0,
-            'views' => $this->faker->boolean(70) ? $this->faker->numberBetween(1, 100_000) : 0,
+            'score' => $this->faker->boolean(70) ? $this->faker->numberBetween(1, 100) : 0,
+            'views' => $this->faker->boolean(70) ? $this->faker->numberBetween(1, 100) : 0,
         ];
     }
 }

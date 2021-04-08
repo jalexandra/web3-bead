@@ -21,4 +21,8 @@ class Question extends Model
     {
         return $this->belongsToMany(Tag::class);
     }
+
+    public function scoredBy(): BelongsToMany{
+        return $this->belongsToMany(User::class)->withPivot('positive')->as('score');
+    }
 }
