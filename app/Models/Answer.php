@@ -29,6 +29,7 @@ class Answer extends Model
     use HasFactory, UUID, ApiResource;
 
     protected $fillable = ['description'];
+    protected $appends = ['isCorrect'];
 
     public function scoredBy(): BelongsToMany{
         return $this->belongsToMany(User::class)->withPivot('positive')->as('score');
@@ -41,5 +42,10 @@ class Answer extends Model
     public function question(): BelongsTo
     {
         return $this->belongsTo(Question::class);
+    }
+
+    public function getIsCorrectAttribute(): bool
+    {
+        return $this->question->answer_id === $this->id;
     }
 }
