@@ -16,7 +16,7 @@ class CorrectAnswerSeeder extends Seeder
         /** @var Question $question */
         foreach ($questions as $question){
             /** @noinspection PhpUndefinedFieldInspection */
-            $question->answer_id = Answer::random()->id;
+            $question->answer_id = $question->answers()?->inRandomOrder()?->first()?->id;
             $question->save();
         }
     }

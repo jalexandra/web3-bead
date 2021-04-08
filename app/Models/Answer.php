@@ -22,4 +22,9 @@ class Answer extends Model
     public function owner(): BelongsTo{
         return $this->belongsTo(User::class);
     }
+
+    public function question(): BelongsTo
+    {
+        return $this->belongsTo(Question::class);
+    }
 }
