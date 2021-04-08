@@ -44,6 +44,10 @@ class Answer extends Model
         return $this->belongsTo(Question::class);
     }
 
+    /**
+     * @noinspection UnknownInspectionInspection
+     * @noinspection PhpUnused
+     */
     public function getIsCorrectAttribute(): bool
     {
         return $this->question->answer_id === $this->id;
