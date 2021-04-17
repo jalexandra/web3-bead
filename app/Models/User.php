@@ -25,6 +25,8 @@ use Illuminate\Notifications\Notifiable;
  * @property DateTime email_verified_at
  * @property DateTime created_at
  * @property DateTime updated_at
+ * @property int xp
+ * @property int rank
  */
 class User extends Authenticatable
 {
@@ -43,7 +45,7 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
     ];
 
-    protected $appends = ['isAdmin', 'isModerator'];
+    protected $appends = ['isAdmin', 'isModerator', 'rank'];
 
     public function answers(): HasMany
     {
@@ -53,6 +55,10 @@ class User extends Authenticatable
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class, 'owner_id');
+    }
+
+    public function getRankAttribute(): int{
+        return floor(sqrt($this->xp / 10));
     }
 
     public function getIsAdminAttribute(): bool
