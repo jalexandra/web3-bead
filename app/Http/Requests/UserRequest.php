@@ -1,20 +1,20 @@
 <?php
-
+/** @noinspection NullPointerExceptionInspection */
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 use Illuminate\Support\Facades\Auth;
 
-class UserStoreRequest extends FormRequest
+class UserRequest extends FormRequest
 {
     public function authorize(): bool
     {
-        return Auth::user()->auth === 9;
+        return (Auth::user()->auth === 9) || (Auth::user()->id === request()->get('id'));
     }
 
     public function rules(): array
     {
-        return [
+        return request()->method() === 'DELETE' ? [] : [
             'username' => ['required', 'min:3', 'unique:users,username'],
             'email' => ['required', 'email:rfc,dns', 'unique:users,email'],
             'password' => ['required', 'regex:/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/'],
