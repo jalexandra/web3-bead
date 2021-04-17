@@ -19,6 +19,9 @@ use Illuminate\Notifications\Notifiable;
  * @property string email
  * @property string password
  * @property string remember_token
+ * @property int auth
+ * @property bool isAdmin
+ * @property bool isModerator
  * @property DateTime email_verified_at
  * @property DateTime created_at
  * @property DateTime updated_at
@@ -36,8 +39,11 @@ class User extends Authenticatable
     ];
 
     protected $casts = [
+        'auth' => 'integer',
         'email_verified_at' => 'datetime',
     ];
+
+    protected $appends = ['isAdmin', 'isModerator'];
 
     public function answers(): HasMany
     {
@@ -47,5 +53,15 @@ class User extends Authenticatable
     public function questions(): HasMany
     {
         return $this->hasMany(Question::class, 'owner_id');
+    }
+
+    public function getIsAdminAttribute(): bool
+    {
+        return $this->auth === 9;
+    }
+
+    public function getIsModeratorAttribute(): bool
+    {
+        return $this->auth === 2;
     }
 }
