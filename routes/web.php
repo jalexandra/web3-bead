@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,3 +19,6 @@ Route::get('/', function () {
 });
 
 Route::view('home', 'home')->middleware('auth');
+
+Route::get('/profile', [UserController::class, 'profile'])->middleware('auth')->name('user.profile');
+Route::resource('user', UserController::class);
